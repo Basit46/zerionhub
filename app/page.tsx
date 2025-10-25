@@ -10,10 +10,13 @@ import ConnectWallet from "./components/ConnectWallet";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { PostType } from "@/types";
+import { useActiveAccount } from "thirdweb/react";
 
 const Home = () => {
+  const account = useActiveAccount();
+
   const { data: posts = [] } = useQuery({
-    queryKey: ["posts"],
+    queryKey: ["posts", account?.address],
     queryFn: async () => {
       const res = await axios.get("/api/posts");
       return res.data.posts;

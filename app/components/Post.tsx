@@ -3,6 +3,7 @@
 import {
   LucideBadgeCheck,
   LucideChevronDown,
+  LucideLoaderCircle,
   LucideMessageCircleReply,
   LucideSendHorizonal,
   LucideThumbsUp,
@@ -60,7 +61,7 @@ const Post = ({ post }: { post: PostType }) => {
   };
 
   //Add a comment
-  const { mutate: commentMutate } = useMutation({
+  const { mutate: commentMutate, isPending } = useMutation({
     mutationFn: async ({
       postId,
       userId,
@@ -178,15 +179,20 @@ const Post = ({ post }: { post: PostType }) => {
                 onChange={(e) => setCommentMsg(e.target.value)}
                 placeholder="Reply post"
               />
-              <Button>
-                <LucideSendHorizonal />
+
+              <Button disabled={isPending}>
+                {isPending ? (
+                  <LucideLoaderCircle className="animate-spin" />
+                ) : (
+                  <LucideSendHorizonal />
+                )}
               </Button>
             </form>
 
             <div className="mt-[10px] flex flex-col gap-2">
-              {post?.comments?.map((comment) => (
+              {post?.comments?.map((comment, i) => (
                 <div
-                  key={comment._id}
+                  key={i}
                   className="flex gap-2 bg-gray-600 p-[10px] rounded-lg"
                 >
                   <div className="relative size-[32px] bg-aqua-700 rounded-full">

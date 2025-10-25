@@ -3,6 +3,8 @@
 import { Input } from "@/components/ui/input";
 import { useGlobalStore } from "@/store/globalStore";
 import {
+  LucideArrowUpRightFromCircle,
+  LucideArrowUpRightFromSquare,
   LucideChartCandlestick,
   LucideLayoutDashboard,
   LucideLifeBuoy,
@@ -101,7 +103,7 @@ const Sidebar = () => {
             {!hideSideBar && <p>AI Insights</p>}
           </Link>
 
-          <Link
+          {/* <Link
             href="/leaderboard"
             className={
               pathname.startsWith("/leaderboard") ? "navlink active" : "navlink"
@@ -110,20 +112,20 @@ const Sidebar = () => {
             <LucideTrophy />
 
             {!hideSideBar && <p>Leaderboard</p>}
-          </Link>
+          </Link> */}
         </div>
 
         <div className="flex flex-col gap-2">
-          <Link href="/community" className="navlink">
+          <a
+            href="https://x.com/zerion"
+            target="blank"
+            rel="noopener noreferrer"
+            className="navlink"
+          >
             <LucideUsers2 />
-
             {!hideSideBar && <p>Zerion Community</p>}
-          </Link>
-          <Link href="/help" className="navlink">
-            <LucideLifeBuoy />
-
-            {!hideSideBar && <p>Help Center</p>}
-          </Link>
+            {!hideSideBar && <LucideArrowUpRightFromSquare />}
+          </a>
         </div>
       </div>
     </div>

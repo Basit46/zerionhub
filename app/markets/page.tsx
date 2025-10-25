@@ -126,6 +126,10 @@ const Markets = () => {
     );
   }, [coins, searchValue]);
 
+  if (isLoading) {
+    return null;
+  }
+
   return (
     <div className="w-full flex flex-col p-[20px]">
       <header className="w-full flex justify-between items-center">

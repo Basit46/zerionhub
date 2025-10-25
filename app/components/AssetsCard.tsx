@@ -21,19 +21,25 @@ const AssetsCard = () => {
     <div className="main-card p-[12px] flex flex-col gap-[20px]">
       <div className="flex items-center gap-2 text-text-600">
         <LucideWalletCards className="size-[20px]" />
-        <p>Holdings</p>
+        <p>Top Holdings</p>
       </div>
 
-      <div className="scrollbar-hide flex-1 w-full overflow-y-auto">
-        <div className="h-fit flex flex-col gap-[8px]">
-          {data.map((item: any, i: number) => (
+      <div className="scrollbar-hide flex-1 w-full overflow-y-hidden">
+        <div className="h-fit flex flex-col">
+          {data.slice(0, 3).map((item: any, i: number) => (
             <div
               key={i}
-              className="flex items-center justify-between pb-[4px] border-b border-b-gray-600 text-sm"
+              className={`${
+                i == 0
+                  ? "bg-aqua-600"
+                  : i === 1
+                  ? "bg-[chocolate] mt-[-50px]"
+                  : "bg-[tomato] mt-[-50px]"
+              } w-full h-[100px] flex justify-between px-[10px] pt-[12px] text-sm rounded-[8px]`}
             >
-              <div className="flex items-center gap-1">
+              <div className="h-fit flex items-center gap-1">
                 <Image
-                  src={item?.attributes?.icon?.url}
+                  src={item?.attributes?.icon?.url || null}
                   width={20}
                   height={20}
                   alt="coin"

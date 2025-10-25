@@ -5,6 +5,7 @@ import {
   LucideArrowDownToDot,
   LucideArrowRight,
   LucideArrowUpFromDot,
+  LucideLoaderCircle,
 } from "lucide-react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
@@ -28,7 +29,7 @@ const AddPostBox = () => {
     setReturnPercent(pnl?.toString());
   }, [pnl]);
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: async ({
       userId,
       message,
@@ -118,9 +119,15 @@ const AddPostBox = () => {
             </Button>
           </div>
 
-          <Button>
-            <p>Post</p>
-            <LucideArrowRight />
+          <Button disabled={isPending}>
+            {isPending ? (
+              <LucideLoaderCircle className="animate-spin" />
+            ) : (
+              <>
+                <p>Post</p>
+                <LucideArrowRight />
+              </>
+            )}
           </Button>
         </div>
       </form>

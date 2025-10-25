@@ -8,7 +8,7 @@ export const useUser = () => {
   const account = useActiveAccount();
 
   const queryRes = useQuery({
-    queryKey: ["user"],
+    queryKey: ["user", account?.address],
     queryFn: async () => {
       const res = await axios.get(
         `/api/user?walletAddress=${account?.address}`
