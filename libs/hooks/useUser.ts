@@ -3,7 +3,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useActiveAccount } from "thirdweb/react";
-import zerionInstance from "../zerionInstance";
 
 export const useUser = () => {
   const account = useActiveAccount();
@@ -28,9 +27,7 @@ export const useGetUserPNL = () => {
   const queryRes = useQuery({
     queryKey: ["userPNL", account?.address],
     queryFn: async () => {
-      const res = await zerionInstance.get(
-        `/wallets/${account?.address}/pnl?currency=usd`
-      );
+      const res = await axios.get(`/api/zerion/pnl/${account?.address}`);
 
       const { realized_gain, unrealized_gain, net_invested } =
         res.data.data.attributes;

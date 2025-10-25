@@ -1,7 +1,7 @@
 "use client";
 
-import zerionInstance from "@/libs/zerionInstance";
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import Image from "next/image";
 import React from "react";
 
@@ -9,10 +9,8 @@ const Slideshow = () => {
   const { data = [], isLoading } = useQuery({
     queryKey: ["coins"],
     queryFn: async () => {
-      const res = await zerionInstance.get(
-        "/fungibles/?currency=usd&page[size]=100&sort=-market_data.market_cap"
-      );
-      return res.data.data;
+      const res = await axios.get("/api/zerion/fungibles");
+      return res.data;
     },
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 60 * 6,
