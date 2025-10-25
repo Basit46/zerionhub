@@ -5,12 +5,13 @@ import { connectDB } from "@/utils/mongodb";
 
 export async function POST(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
     const { userId } = await req.json();
-    const post = await Post.findById(params.id);
+    const { id } = await params;
+    const post = await Post.findById(id);
 
     if (!post)
       return NextResponse.json({ error: "Post not found" }, { status: 404 });
