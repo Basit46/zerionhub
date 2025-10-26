@@ -1,4 +1,6 @@
 import mongoose, { Mongoose } from "mongoose";
+import User from "@/models/User";
+import Post from "@/models/Post";
 
 const MONGODB_URI: string = process.env.MONGODB_URI || "";
 

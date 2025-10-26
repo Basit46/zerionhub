@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import Post from "@/models/Post";
 import { connectDB } from "@/utils/mongodb";
+import User from "@/models/User";
 
 export async function POST(req: Request) {
   try {
@@ -28,7 +29,7 @@ export async function POST(req: Request) {
 export async function GET() {
   try {
     await connectDB();
-
+    const users = await User.find();
     const posts = await Post.find()
       .populate("user", "walletAddress avatar")
       .populate("comments.user", "walletAddress avatar")
