@@ -5,16 +5,19 @@ import axios from "axios";
 import { LucideWalletCards } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import { useActiveAccount } from "thirdweb/react";
 
 const AssetsCard = () => {
-  const { data = [], isLoading } = useQuery({
-    queryKey: ["asset"],
+  const account = useActiveAccount();
+
+  const { data = [] } = useQuery({
+    queryKey: ["assets", account?.address],
     queryFn: async () => {
-      const res = await axios.get("/api/zerion/fungibles");
-      return res.data;
+      const res = await axios.get(
+        `/api/zerion/wallet/${account?.address}/positions`
+      );
+      return res.data.data;
     },
-    refetchOnWindowFocus: false,
-    staleTime: 1000 * 60 * 60 * 6,
   });
 
   return (
@@ -26,12 +29,12 @@ const AssetsCard = () => {
 
       <div className="scrollbar-hide flex-1 w-full overflow-y-hidden">
         <div className="h-fit flex flex-col">
-          {data.slice(0, 3).map((item: any, i: number) => (
+          {data?.slice(0, 3).map((item: any, i: number) => (
             <div
               key={i}
               className={`${
                 i == 0
-                  ? "bg-aqua-600"
+                  ? "bg-aqua-700"
                   : i === 1
                   ? "bg-[chocolate] mt-[-50px]"
                   : "bg-[tomato] mt-[-50px]"
@@ -39,14 +42,19 @@ const AssetsCard = () => {
             >
               <div className="h-fit flex items-center gap-1">
                 <Image
-                  src={item?.attributes?.icon?.url || null}
+                  src={
+                    item?.attributes?.fungible_info?.icon?.url || "/coin.png"
+                  }
                   width={20}
                   height={20}
                   alt="coin"
                 />
-                <p className="">{item?.attributes?.symbol}</p>
+                <p className="">{item?.attributes?.fungible_info?.name}</p>
               </div>
-              <p>${item?.attributes?.market_data?.price}</p>
+              <p>
+                {item?.attributes?.quantity?.float}{" "}
+                {item?.attributes?.fungible_info?.symbol}
+              </p>
             </div>
           ))}
         </div>

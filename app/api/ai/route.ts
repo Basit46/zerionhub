@@ -4,14 +4,14 @@ import { NextResponse } from "next/server";
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 export async function POST(req: Request) {
-  const { prompt, watchlist, portfolio } = await req.json();
+  const { prompt, portfolio } = await req.json();
 
   const chatCompletion = await groq.chat.completions.create({
     messages: [
       {
         role: "system",
         content: `You are a crypto analyst named ZerionHub AI. 
-                  Here is the user's crypto portfolio (JSON): ${JSON.stringify(
+                  Here is the user's crypto holdings: ${JSON.stringify(
                     portfolio || []
                   )} 
                   Use these only if relevant to the user's query.`,

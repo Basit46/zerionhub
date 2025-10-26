@@ -54,3 +54,17 @@ export function truncateAddress(address: string | null | undefined): string {
   if (!address) return "";
   return `${address.slice(0, 6)}...${address.slice(-4)}`;
 }
+
+export function formatTimestamp2(timestamp: number) {
+  const date = new Date(
+    timestamp.toString().length === 10 ? timestamp * 1000 : timestamp
+  );
+
+  return date.toLocaleString(undefined, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}

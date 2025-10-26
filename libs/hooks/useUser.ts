@@ -18,7 +18,11 @@ export const useUser = () => {
     enabled: !!account?.address,
   });
 
-  return { ...queryRes, userId: queryRes.data?._id };
+  return {
+    ...queryRes,
+    avatar: queryRes.data?.avatar,
+    userId: queryRes.data?._id,
+  };
 };
 
 export const useGetUserPNL = () => {

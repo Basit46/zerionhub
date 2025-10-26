@@ -9,20 +9,33 @@ import {
 } from "lucide-react";
 import { v4 } from "uuid";
 import ReactMarkdown from "react-markdown";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import remarkGfm from "remark-gfm";
 import axios from "axios";
 import { useGlobalStore } from "@/store/globalStore";
+import { useActiveAccount } from "thirdweb/react";
 
 const prompts = [
-  "Analyse my portfolio",
-  "Show me my best and worst performing assets",
-  "What percentage of my portfolio is in each coin?",
-  "Suggest ways to rebalance my portfolio",
+  "Give me a detailed analysis of my portfolio performance",
+  "Which assets are driving most of my gains or losses?",
+  "Break down my portfolio allocation across all coins",
+  "Suggest how I can rebalance to improve risk and returns",
 ];
 
 const CoinVistaAI = () => {
   const { prompt, setPrompt, chats, addChat, clearChats } = useGlobalStore();
+
+  const account = useActiveAccount();
+
+  const { data = [] } = useQuery({
+    queryKey: ["assets", account?.address],
+    queryFn: async () => {
+      const res = await axios.get(
+        `/api/zerion/wallet/${account?.address}/positions`
+      );
+      return res.data.data;
+    },
+  });
 
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
@@ -49,6 +62,7 @@ const CoinVistaAI = () => {
     mutationFn: async (value: string) => {
       const res = await axios.post("/api/ai", {
         prompt: value,
+        portfolio: data,
       });
       return res.data.data;
     },
@@ -106,7 +120,7 @@ const CoinVistaAI = () => {
                   ) : (
                     <div
                       key={chat.id}
-                      className="mr-auto w-fit h-fit max-w-[80%] px-[10px] py-[4px] rounded-[8px] break-words prose prose-sm overflow-y-auto"
+                      className="mr-auto w-fit h-fit max-w-[80%] px-[10px] py-[4px] rounded-[8px] break-words prose prose-sm prose-invert text-white overflow-y-auto"
                     >
                       <ReactMarkdown remarkPlugins={[remarkGfm]}>
                         {chat.text}

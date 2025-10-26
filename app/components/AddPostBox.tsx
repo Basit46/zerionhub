@@ -17,7 +17,7 @@ import { toast } from "sonner";
 
 const AddPostBox = () => {
   const queryClient = useQueryClient();
-  const { userId } = useUser();
+  const { userId, avatar } = useUser();
   const { data: pnl = 0 } = useGetUserPNL();
 
   const [message, setMessage] = useState("");
@@ -74,7 +74,7 @@ const AddPostBox = () => {
     <div className="px-[20px] flex gap-2 border-b border-b-gray-700 pt-[10px] pb-[20px]">
       <div className="relative size-[40px] bg-aqua-700 rounded-full">
         <Image
-          src="/nft1.png"
+          src={avatar || "/nft1.png"}
           fill
           className="object-cover rounded-full"
           alt="user"
