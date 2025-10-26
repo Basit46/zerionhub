@@ -26,8 +26,6 @@ export async function POST(req: Request) {
         ? available[Math.floor(Math.random() * available.length)]
         : avatars[Math.floor(Math.random() * avatars.length)];
 
-    console.log("avatar", avatar);
-
     if (!user) {
       user = await User.create({
         walletAddress: address,

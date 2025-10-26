@@ -34,7 +34,6 @@ const Chart = ({
     time: v[0],
     value: v[1],
   }));
-  console.log(values);
 
   return (
     <ResponsiveContainer width="100%" height="100%">

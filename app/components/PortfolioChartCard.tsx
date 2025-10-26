@@ -56,8 +56,6 @@ const PortfolioChartCard = () => {
     },
   });
 
-  console.log(chartData);
-
   return (
     <div className="main-card p-[12px] flex flex-col gap-[12px]">
       <div className="flex items-center justify-between">

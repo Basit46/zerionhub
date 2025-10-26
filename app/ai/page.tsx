@@ -62,7 +62,7 @@ const CoinVistaAI = () => {
     mutationFn: async (value: string) => {
       const res = await axios.post("/api/ai", {
         prompt: value,
-        portfolio: data,
+        portfolio: data.length > 0 ? data : "No holdings",
       });
       return res.data.data;
     },

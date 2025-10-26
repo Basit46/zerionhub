@@ -7,7 +7,6 @@ export async function GET(
   { params }: { params: Promise<{ coinId: string; timeframe: string }> }
 ) {
   const { coinId, timeframe } = await params;
-  console.log(coinId, timeframe);
 
   const response = await fetch(
     `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${

@@ -19,10 +19,12 @@ import axios from "axios";
 import { useUser } from "@/libs/hooks/useUser";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import { useActiveAccount } from "thirdweb/react";
 
 const Post = ({ post }: { post: PostType }) => {
   const queryClient = useQueryClient();
   const { userId } = useUser();
+  const account = useActiveAccount();
 
   const [showMore, setShowMore] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
@@ -35,7 +37,7 @@ const Post = ({ post }: { post: PostType }) => {
   }, [post]);
   const [commentMsg, setCommentMsg] = useState("");
 
-  //Like/unlike msg
+  //Like/unlike post
   const { mutate: likeToggleMutate } = useMutation({
     mutationFn: async ({
       postId,
@@ -50,7 +52,7 @@ const Post = ({ post }: { post: PostType }) => {
       return res.data;
     },
     onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      queryClient.invalidateQueries({ queryKey: ["posts", account?.address] });
     },
   });
 
@@ -78,7 +80,7 @@ const Post = ({ post }: { post: PostType }) => {
       return res.data;
     },
     onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      queryClient.invalidateQueries({ queryKey: ["posts", account?.address] });
     },
   });
 
@@ -109,7 +111,9 @@ const Post = ({ post }: { post: PostType }) => {
         <div className="w-full flex items-center justify-between">
           <div className="flex items-center">
             <p className="text-[18px]">
-              {truncateAddress(post?.user?.walletAddress)}
+              {truncateAddress(post?.user?.walletAddress)}{" "}
+              {post?.user?.walletAddress?.toLowerCase().trim() ===
+                account?.address?.toLowerCase().trim() && "(You)"}
             </p>
             <LucideBadgeCheck fill="" className="ml-1 mr-3" />
             <p className="text-gray-300 text-sm">
