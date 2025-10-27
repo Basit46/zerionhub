@@ -37,14 +37,16 @@ const Home = () => {
 
       <Slideshow />
 
-      <div className="flex-1 flex">
-        <div className="w-[70%] h-full border-r border-r-gray-700">
+      <div className="flex-1 min-h-[100px] flex">
+        <div className="w-[70%] h-full flex flex-col border-r border-r-gray-700">
           <AddPostBox />
 
-          <div className="">
-            {posts?.map((post: PostType) => (
-              <Post key={post._id} post={post} />
-            ))}
+          <div className="flex-1 overflow-y-auto">
+            <div className="h-fit">
+              {posts?.map((post: PostType) => (
+                <Post key={post._id} post={post} />
+              ))}
+            </div>
           </div>
         </div>
 

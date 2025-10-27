@@ -17,7 +17,7 @@ const News = () => {
   });
 
   return (
-    <div className="sticky top-0 flex-1 flex flex-col">
+    <div className="flex-1 flex flex-col">
       <div className="w-full h-[56px] border-b border-b-gray-700 pt-[20px] p-[16px] flex items-center justify-between">
         <p className="font-medium">News</p>
       </div>

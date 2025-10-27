@@ -3,6 +3,7 @@ import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
 import RootLayoutContent from "./components/RootLayoutContent";
 import { Toaster } from "@/components/ui/sonner";
+import { ThirdwebProvider } from "thirdweb/react";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -25,7 +26,9 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} font-sans antialiased w-screen h-screen relative`}
       >
-        <RootLayoutContent children={children} />
+        <ThirdwebProvider>
+          <RootLayoutContent children={children} />
+        </ThirdwebProvider>
         <Toaster />
       </body>
     </html>

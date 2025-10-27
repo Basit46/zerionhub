@@ -37,11 +37,11 @@ const Sidebar = () => {
     <div
       className={`${
         !hideSideBar ? "w-[300px]" : "w-[86px]"
-      } sticky top-0 shrink-0 h-screen p-[20px] pt-[30px] flex flex-col items-center border-r-[0.5px] border-r-gray-600 duration-300`}
+      } sticky top-0 shrink-0 h-screen p-[20px] pt-[30px] flex flex-col items-center border-r-[0.5px] border-r-gray-600`}
     >
       <div className="w-full flex items-center justify-center">
         {!hideSideBar && (
-          <div className="flex-1 flex items-center gap-2">
+          <div className="flex-1 flex items-center gap-2 duration-500 delay-1000">
             <Image src="/logo-raw.png" width={28} height={28} alt="logo" />
             <p className="text-white text-[20px] font-medium">ZerionHub</p>
           </div>
@@ -55,13 +55,23 @@ const Sidebar = () => {
       <div
         className={`${
           hideSideBar ? "opacity-0 pointer-events-none" : ""
-        } mt-[20px] relative w-full`}
+        } mt-[20px] relative w-full bg-gray-800 h-[36px] rounded-[8px] flex items-center px-[10px]`}
       >
-        <LucideSearch className="absolute top-1/2 -translate-y-1/2 left-[8px] text-gray-300 size-[18px]" />
-        <Input className="pl-[30px]" placeholder="Search..." />
+        <p className="text-sm">
+          Built with ❤️ by{" "}
+          <a
+            className="underline text-aqua-500"
+            href="http://x.com/Basit_js"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Basit
+          </a>{" "}
+          for Zerion
+        </p>
       </div>
 
-      <div className="w-full mt-[20px] flex-1 flex flex-col justify-between">
+      <div className="w-full mt-[30px] flex-1 flex flex-col justify-between">
         <div className="flex flex-col gap-2">
           <Link
             href="/"
