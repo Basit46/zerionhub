@@ -57,7 +57,7 @@ const PortfolioChartCard = () => {
   });
 
   return (
-    <div className="main-card p-[12px] flex flex-col gap-[12px]">
+    <div className="main-card h-[400px] lg:min-h-fit p-[12px] flex flex-col gap-[12px]">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2 text-text-600">
           <LucideChartArea className="size-[20px]" />

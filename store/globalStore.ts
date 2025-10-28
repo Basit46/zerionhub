@@ -10,6 +10,9 @@ interface GlobalState {
   hideSideBar: boolean;
   setHideSideBar: (v: boolean) => void;
 
+  showMenu: boolean;
+  setShowMenu: (v: boolean) => void;
+
   prompt: string;
   setPrompt: (v: string) => void;
 
@@ -21,6 +24,9 @@ interface GlobalState {
 export const useGlobalStore = create<GlobalState>((set) => ({
   hideSideBar: false,
   setHideSideBar: (v) => set(() => ({ hideSideBar: v })),
+
+  showMenu: false,
+  setShowMenu: (v) => set(() => ({ showMenu: v })),
 
   prompt: "",
   setPrompt: (v) => set((state) => ({ prompt: v })),

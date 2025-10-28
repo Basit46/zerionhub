@@ -16,10 +16,6 @@ const Slideshow = () => {
     staleTime: 1000 * 60 * 60 * 6,
   });
 
-  if (isLoading) {
-    return null;
-  }
-
   return (
     <div className="scrollbar-hide slide-wrap shrink-0 relative mt-[4px] h-[50px] w-full bg-pry-700 bg-opacity-10 overflow-auto">
       <div className="slide w-fit h-full flex items-center">

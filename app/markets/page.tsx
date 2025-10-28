@@ -10,9 +10,15 @@ import { useRouter } from "next/navigation";
 import DataTable from "../components/DataTable";
 import { useQuery } from "@tanstack/react-query";
 import axiosCoingeckoApi from "@/libs/axiosCoingecko";
+import ConnectWallet from "../components/ConnectWallet";
+import { Button } from "@/components/ui/button";
+import { useGlobalStore } from "@/store/globalStore";
+import { LucideMenu, LucideX } from "lucide-react";
 
 const Markets = () => {
   const router = useRouter();
+  const { showMenu, setShowMenu } = useGlobalStore();
+
   const { data: coins = [], isLoading } = useQuery({
     queryKey: ["markets"],
     queryFn: async () => {
@@ -136,6 +142,13 @@ const Markets = () => {
         <div className="flex items-center gap-2">
           <LucideChartCandlestick className="size-[24px]" />
           <p>Markets</p>
+        </div>
+
+        <div className="flex gap-2 items-center">
+          <ConnectWallet />
+          <Button onClick={() => setShowMenu(!showMenu)} className="sm:hidden">
+            {showMenu ? <LucideX className="text-[red]" /> : <LucideMenu />}
+          </Button>
         </div>
       </header>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { LucideLayoutDashboard } from "lucide-react";
+import { LucideLayoutDashboard, LucideMenu, LucideX } from "lucide-react";
 import React from "react";
 import Slideshow from "./components/Slideshow";
 import AddPostBox from "./components/AddPostBox";
@@ -11,11 +11,15 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { PostType } from "@/types";
 import { useActiveAccount } from "thirdweb/react";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
+import { useGlobalStore } from "@/store/globalStore";
 
 const Home = () => {
+  const { showMenu, setShowMenu } = useGlobalStore();
   const account = useActiveAccount();
 
-  const { data: posts = [] } = useQuery({
+  const { data: posts = [], isLoading } = useQuery({
     queryKey: ["posts", account?.address],
     queryFn: async () => {
       const res = await axios.get("/api/posts");
@@ -32,20 +36,31 @@ const Home = () => {
           <p>Dashboard</p>
         </div>
 
-        <ConnectWallet />
+        <div className="flex gap-2 items-center">
+          <ConnectWallet />
+          <Button onClick={() => setShowMenu(!showMenu)} className="sm:hidden">
+            {showMenu ? <LucideX className="text-[red]" /> : <LucideMenu />}
+          </Button>
+        </div>
       </header>
 
       <Slideshow />
 
       <div className="flex-1 min-h-[100px] flex">
-        <div className="w-[70%] h-full flex flex-col border-r border-r-gray-700">
+        <div className="w-full lg:w-[70%] h-full flex flex-col border-r border-r-gray-700">
           <AddPostBox />
 
           <div className="flex-1 overflow-y-auto">
             <div className="h-fit">
-              {posts?.map((post: PostType) => (
-                <Post key={post._id} post={post} />
-              ))}
+              {!isLoading
+                ? posts?.map((post: PostType) => (
+                    <Post key={post._id} post={post} />
+                  ))
+                : Array.from({ length: 5 }).map((_, i) => (
+                    <div key={i} className="pb-[10px]">
+                      <Skeleton className="w-full h-[200px]" />
+                    </div>
+                  ))}
             </div>
           </div>
         </div>

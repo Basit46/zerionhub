@@ -14,6 +14,8 @@ import remarkGfm from "remark-gfm";
 import axios from "axios";
 import { useGlobalStore } from "@/store/globalStore";
 import { useActiveAccount } from "thirdweb/react";
+import ConnectWallet from "../components/ConnectWallet";
+import { LucideMenu, LucideX } from "lucide-react";
 
 const prompts = [
   "Give me a detailed analysis of my portfolio performance",
@@ -23,7 +25,15 @@ const prompts = [
 ];
 
 const CoinVistaAI = () => {
-  const { prompt, setPrompt, chats, addChat, clearChats } = useGlobalStore();
+  const {
+    prompt,
+    setPrompt,
+    chats,
+    addChat,
+    clearChats,
+    showMenu,
+    setShowMenu,
+  } = useGlobalStore();
 
   const account = useActiveAccount();
 
@@ -80,11 +90,17 @@ const CoinVistaAI = () => {
           <p>AI Insights</p>
         </div>
 
-        {chats.length > 0 && (
-          <Button onClick={() => clearChats()} variant={"destructive"}>
-            Clear chat
+        <div className="flex gap-2 items-center">
+          {chats.length > 0 && (
+            <Button onClick={() => clearChats()} variant={"destructive"}>
+              Clear chat
+            </Button>
+          )}
+          <ConnectWallet />
+          <Button onClick={() => setShowMenu(!showMenu)} className="sm:hidden">
+            {showMenu ? <LucideX className="text-[red]" /> : <LucideMenu />}
           </Button>
-        )}
+        </div>
       </header>
 
       <div className="flex-1 w-full px-[30px] py-[20px] overflow-y-auto flex justify-center items-end">

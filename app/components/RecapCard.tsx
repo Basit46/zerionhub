@@ -13,6 +13,8 @@ import Image from "next/image";
 import * as htmlToImage from "html-to-image";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { useActiveAccount } from "thirdweb/react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const RecapCard = () => {
   const account = useActiveAccount();
@@ -42,8 +44,39 @@ const RecapCard = () => {
     }
   };
 
+  //Portfolio
+  const { data: portfolio } = useQuery({
+    queryKey: ["balance", account?.address],
+    queryFn: async () => {
+      const res = await axios.get(
+        `/api/zerion/wallet/${account?.address}/portfolio`
+      );
+      return res.data.data;
+    },
+  });
+
+  //NFT
+  const { data: nftCount } = useQuery({
+    queryKey: ["nft", account?.address],
+    queryFn: async () => {
+      const res = await axios.get(`/api/zerion/wallet/${account?.address}/nft`);
+      return res.data.nftCount;
+    },
+  });
+
+  //Transactions
+  const { data: transactions = [] } = useQuery({
+    queryKey: ["transactions", account?.address],
+    queryFn: async () => {
+      const res = await axios.get(
+        `/api/zerion/wallet/${account?.address}/transactions`
+      );
+      return res.data.data;
+    },
+  });
+
   return (
-    <div className="main-card relative group">
+    <div className="main-card min-h-[200px] lg:min-h-fit relative group">
       <Image
         src="/recapBg.png"
         fill
@@ -103,6 +136,77 @@ const RecapCard = () => {
                   {account?.address}
                 </h1>
                 <p className="font-bold">Wrapped</p>
+
+                <div className="mt-[20px]">
+                  <h1 className="text-white text-[30px] font-semibold">
+                    Portfolio
+                  </h1>
+                  <div className="w-fit grid grid-cols-2 gap-x-3 gap-y-2">
+                    <p className="text-[24px]">
+                      ${portfolio?.attributes?.total?.positions?.toFixed(2)}{" "}
+                      <span className="text-sm">Total positions</span>
+                    </p>
+
+                    <p className="text-[24px]">
+                      $
+                      {portfolio?.attributes?.positions_distribution_by_type?.wallet?.toFixed(
+                        2
+                      )}{" "}
+                      <span className="text-sm">Wallet balance</span>
+                    </p>
+
+                    <p className="text-[24px]">
+                      $
+                      {portfolio?.attributes?.positions_distribution_by_type?.deposited?.toFixed(
+                        2
+                      )}{" "}
+                      <span className="text-sm">Deposited</span>
+                    </p>
+
+                    <p className="text-[24px]">
+                      $
+                      {portfolio?.attributes?.positions_distribution_by_type?.borrowed?.toFixed(
+                        2
+                      )}{" "}
+                      <span className="text-sm">Borrowed</span>
+                    </p>
+
+                    <p className="text-[24px]">
+                      $
+                      {portfolio?.attributes?.positions_distribution_by_type?.locked?.toFixed(
+                        2
+                      )}{" "}
+                      <span className="text-sm">Locked</span>
+                    </p>
+
+                    <p className="text-[24px]">
+                      $
+                      {portfolio?.attributes?.positions_distribution_by_type?.staked?.toFixed(
+                        2
+                      )}{" "}
+                      <span className="text-sm">Staked</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-[30px]">
+                  <h1 className="text-white text-[30px] font-semibold">NFTs</h1>
+                  <p className="text-[24px]">
+                    You currently hold {nftCount?.toLocaleString()} NFT
+                    {nftCount > 1 && "s"}
+                  </p>
+                </div>
+
+                <div className="mt-[30px]">
+                  <h1 className="text-white text-[30px] font-semibold">
+                    Transactions
+                  </h1>
+                  <p className="text-[24px]">
+                    You have done {transactions?.length?.toLocaleString()}{" "}
+                    Transaction
+                    {transactions.length > 1 && "s"}
+                  </p>
+                </div>
               </div>
             </div>
           </DialogContent>

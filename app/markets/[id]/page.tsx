@@ -46,7 +46,7 @@ const CoinDetails = () => {
       </div>
 
       <div className="flex-1 w-full px-[30px] flex-col xl:flex-row flex gap-[20px] overflow-y-auto">
-        <div className="w-full xl:w-[25%] h-full pr-[30px] pt-[30px] border-r border-r-gray-700 overflow-y-auto">
+        <div className="w-full xl:w-[25%] h-full pr-[30px] pt-[30px] xl:border-r border-r-gray-700 overflow-y-auto">
           <div className="flex items-center gap-2">
             <Image src={data?.image?.small} width={40} height={40} alt="coin" />
             <h1 className="text-[24px] text-gray-200 font-medium">
@@ -115,8 +115,8 @@ const CoinDetails = () => {
           </div>
         </div>
 
-        <div className="flex-1 h-full py-[30px] pb-[40px] flex flex-col space-y-[20px]">
-          <div className="flex justify-between items-center">
+        <div className="hidden xl:flex flex-1 h-full py-[30px] pb-[40px] flex-col space-y-[20px]">
+          <div className="flex flex-col xl:flex-row justify-between items-center">
             <div className="chart-btns w-fit h-[40px] bg-gray-700 px-[4px] py-[4px] rounded-[8px] flex items-center gap-2">
               <button
                 onClick={() => setSection("0")}
@@ -160,7 +160,7 @@ const CoinDetails = () => {
             </div>
           </div>
 
-          <div className="h-full w-full">
+          <div className="h-[500px] xl:h-full w-full">
             <Chart
               timeframe={timeframe}
               section={

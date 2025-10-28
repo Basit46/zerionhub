@@ -135,7 +135,7 @@ const Post = ({ post }: { post: PostType }) => {
               >
                 {post?.returnPercent}%
               </span>{" "}
-              returns all time
+              <span className="hidden sm:inline"> returns all time</span>
             </p>
           </Badge>
         </div>

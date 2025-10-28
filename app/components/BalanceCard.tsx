@@ -18,7 +18,7 @@ const BalanceCard = () => {
   });
 
   return (
-    <div className="main-card p-[12px] pb-[20px] flex flex-col justify-between">
+    <div className="main-card min-h-[200px] lg:min-h-fit p-[12px] pb-[20px] flex flex-col justify-between">
       <div className="flex items-center gap-2 text-text-600">
         <LucideWallet className="size-[20px]" />
         <p>Total Balance</p>
