@@ -13,7 +13,8 @@ export async function GET(
         headers: {
           Authorization: `Basic ${process.env.ZERION_API_KEY}`,
           Accept: "application/json",
-          ...(process.env.NODE_ENV === "development" && { "X-Env": "testnet" }),
+          "X-Env": "testnet",
+          // ...(process.env.NODE_ENV === "development" && { "X-Env": "testnet" }),
         },
         cache: "no-store",
       }
