@@ -52,18 +52,18 @@ const News = () => {
                     <h1 className="text-[14px] leading-[20px] text-grey-900 font-semibold">
                       {news?.title}
                     </h1>
-
-                    {/* <p className="mt-[4px] text-grey-500 text-[12px] line-clamp-2">
-                      {news?.description}
-                    </p> */}
                   </div>
 
-                  <div className="relative size-[64px] overflow-hidden flex-shrink-0 rounded-[8px] ">
+                  <div className="relative size-[64px] overflow-hidden flex-shrink-0 rounded-[8px]">
                     <Image
                       src={news?.image_url || "/crypto.jpg"}
                       alt={news?.title}
                       fill
                       className="object-cover"
+                      onError={(e) => {
+                        const target = e.currentTarget as HTMLImageElement;
+                        target.src = "/crypto.jpg"; // fallback to default image
+                      }}
                     />
                   </div>
                 </a>
