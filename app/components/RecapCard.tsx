@@ -98,7 +98,7 @@ const RecapCard = () => {
             <Button className="w-fit">View</Button>
           </DialogTrigger>
 
-          <DialogContent className="w-[80vw] h-[80vh] bg-black max-w-full p-0 border-none outline-none rounded-[20px] overflow-hidden">
+          {/* <DialogContent className="w-[80vw] h-[80vh] bg-black max-w-full p-0 border-none outline-none rounded-[20px] overflow-hidden">
             <div ref={modalRef} className="relative w-full h-full">
               <VisuallyHidden>
                 <DialogTitle>Portfolio Recap</DialogTitle>
@@ -206,6 +206,107 @@ const RecapCard = () => {
                     Transaction
                     {transactions.length > 1 && "s"}
                   </p>
+                </div>
+              </div>
+            </div>
+          </DialogContent> */}
+
+          <DialogContent className="w-[80vw] h-[80vh] bg-black max-w-full p-0 border-none outline-none rounded-[20px] overflow-hidden">
+            <div ref={modalRef} className="relative w-full h-full">
+              <VisuallyHidden>
+                <DialogTitle>Portfolio Recap</DialogTitle>
+              </VisuallyHidden>
+
+              <Image
+                src="/recap-bg.png"
+                fill
+                className="h-full w-full object-cover"
+                priority
+                alt="recap"
+              />
+
+              <div className="absolute inset-0 w-full h-full z-[2] pl-[40px] pt-[40px]">
+                <div className="absolute top-[10px] left-[10px] flex items-center justify-center gap-2">
+                  <Image
+                    src="/logo-raw.png"
+                    width={20}
+                    height={20}
+                    alt="logo"
+                  />
+                  <p className="text-white tex font-medium">ZerionHub</p>
+                </div>
+
+                <Button
+                  ref={btnRef}
+                  onClick={handleDownload}
+                  className="absolute bottom-[20px] right-[20px]"
+                >
+                  <p>Download</p>
+                  <LucideDownload />
+                </Button>
+
+                <h1 className="mt-[20px] text-white text-[30px] font-bold italic">
+                  {account?.address}
+                </h1>
+                <p className="font-bold">Wrapped</p>
+
+                <div className="mt-[20px]">
+                  <h1 className="text-white text-[30px] font-semibold">
+                    Portfolio
+                  </h1>
+                  <div className="w-fit grid grid-cols-2 gap-x-3 gap-y-2">
+                    <p className="text-[24px]">
+                      $200 <span className="text-sm">Total positions</span>
+                    </p>
+
+                    <p className="text-[24px]">
+                      $200
+                      <span className="text-sm">Wallet balance</span>
+                    </p>
+
+                    <p className="text-[24px]">
+                      $ 180 <span className="text-sm">Deposited</span>
+                    </p>
+
+                    <p className="text-[24px]">
+                      $
+                      {portfolio?.attributes?.positions_distribution_by_type?.borrowed?.toFixed(
+                        2
+                      )}{" "}
+                      <span className="text-sm">Borrowed</span>
+                    </p>
+
+                    <p className="text-[24px]">
+                      $
+                      {portfolio?.attributes?.positions_distribution_by_type?.locked?.toFixed(
+                        2
+                      )}{" "}
+                      <span className="text-sm">Locked</span>
+                    </p>
+
+                    <p className="text-[24px]">
+                      $
+                      {portfolio?.attributes?.positions_distribution_by_type?.staked?.toFixed(
+                        2
+                      )}{" "}
+                      <span className="text-sm">Staked</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-[30px]">
+                  <h1 className="text-white text-[30px] font-semibold">NFTs</h1>
+                  <p className="text-[24px]">
+                    You currently hold {nftCount?.toLocaleString()} NFT
+                    {nftCount > 1 && "s"}
+                  </p>
+                </div>
+
+                <div className="mt-[30px]">
+                  <h1 className="text-white text-[30px] font-semibold">
+                    Transactions
+                  </h1>
+                  <p className="text-[24px]">You have done 20 Transactions</p>
                 </div>
               </div>
             </div>

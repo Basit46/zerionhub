@@ -124,21 +124,19 @@ const Post = ({ post }: { post: PostType }) => {
           </div>
 
           <Badge
-            className="hidden vsm:block px-[10px] h-[28px] rounded-full border-gray-500"
+            className="hidden vsm:flex px-[10px] h-[28px] rounded-full border-gray-500 items-center gap-1"
             variant={"outline"}
           >
-            <p className="">
-              <span
-                className={
-                  parseFloat(post.returnPercent) < 0
-                    ? "text-red-600"
-                    : "text-green-600"
-                }
-              >
-                {post?.returnPercent}%
-              </span>{" "}
-              <span className="hidden sm:inline"> returns all time</span>
-            </p>
+            <span
+              className={
+                parseFloat(post.returnPercent) < 0
+                  ? "text-red-600"
+                  : "text-green-600"
+              }
+            >
+              {post?.returnPercent}%
+            </span>{" "}
+            <span className="hidden sm:inline"> returns all time</span>
           </Badge>
         </div>
 
