@@ -72,7 +72,7 @@ const AddPostBox = () => {
 
   return (
     <div className="px-[20px] flex gap-2 border-b border-b-gray-700 pt-[10px] pb-[20px]">
-      <div className="relative size-[40px] bg-aqua-700 rounded-full">
+      <div className="hidden vsm:block relative size-[40px] bg-aqua-700 rounded-full">
         <Image
           src={avatar || "/nft1.png"}
           fill
@@ -80,7 +80,7 @@ const AddPostBox = () => {
           alt="user"
         />
       </div>
-      <form onSubmit={handleSubmit} className="flex-1">
+      <form onSubmit={handleSubmit} className="w-full vsm:flex-1">
         <div className="w-full h-[44px] p-[2px] flex items-center justify-center bg-gradient-to-r from-[#3232DC] to-[#ff7583] rounded-lg">
           <Input
             autoFocus

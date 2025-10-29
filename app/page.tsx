@@ -33,7 +33,7 @@ const Home = () => {
       <header className="w-full px-[20px] pt-[20px] flex justify-between items-center">
         <div className="flex items-center gap-2">
           <LucideLayoutDashboard className="size-[24px]" />
-          <p>Dashboard</p>
+          <p className="hidden vsm:inline">Dashboard</p>
         </div>
 
         <div className="flex gap-2 items-center">

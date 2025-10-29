@@ -135,6 +135,9 @@ module.exports = {
       fontFamily: {
         sans: ["var(--poppins)", "sans-serif"],
       },
+      screens: {
+        vsm: "450px",
+      },
     },
   },
   plugins: [

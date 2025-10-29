@@ -63,7 +63,7 @@ const PortfolioChartCard = () => {
           <LucideChartArea className="size-[20px]" />
           <p>Portfolio Overview</p>
         </div>
-        <div className="chart-btns w-fit h-[40px] bg-gray-700 px-[4px] py-[4px] rounded-[8px] flex items-center gap-2">
+        <div className="chart-btns hidden vsm:flex w-fit h-[40px] bg-gray-700 px-[4px] py-[4px] rounded-[8px] items-center gap-2">
           <button
             onClick={() => setTimeframe("week")}
             className={timeframe == "week" ? "active" : ""}

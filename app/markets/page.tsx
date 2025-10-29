@@ -141,7 +141,7 @@ const Markets = () => {
       <header className="w-full flex justify-between items-center">
         <div className="flex items-center gap-2">
           <LucideChartCandlestick className="size-[24px]" />
-          <p>Markets</p>
+          <p className="hidden vsm:inline">Markets</p>
         </div>
 
         <div className="flex gap-2 items-center">

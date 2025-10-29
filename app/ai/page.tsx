@@ -87,13 +87,14 @@ const CoinVistaAI = () => {
       <header className="w-full px-[20px] pt-[20px] flex justify-between items-center">
         <div className="flex items-center gap-2">
           <LucideSparkles className="size-[24px]" />
-          <p>AI Insights</p>
+          <p className="hidden vsm:inline">AI Insights</p>
         </div>
 
         <div className="flex gap-2 items-center">
           {chats.length > 0 && (
             <Button onClick={() => clearChats()} variant={"destructive"}>
-              Clear chat
+              <p className="hidden vsm:block">Clear chat</p>
+              <LucideX className="block vsm:hidden" />
             </Button>
           )}
           <ConnectWallet />
@@ -110,7 +111,7 @@ const CoinVistaAI = () => {
             className="scrollbar-hide flex-1 overflow-auto flex flex-col scroll-smooth"
           >
             {chats?.length < 1 ? (
-              <div className="mt-auto grid grid-cols-2 lg:flex justify-between gap-[20px]">
+              <div className="mt-auto grid grid-cols-2 lg:flex justify-between gap-[20px] ">
                 {prompts.map((prompt, i) => (
                   <div
                     key={i}
@@ -118,7 +119,9 @@ const CoinVistaAI = () => {
                     role="button"
                     className="w-full h-[130px] sm:h-[100px] lg:h-[150px] p-[10px] border border-gray-400 rounded-[12px] flex flex-col justify-between"
                   >
-                    <p className="text-gray-300">{prompt}</p>
+                    <p className="text-gray-300 text-[12px] vsm:text-base">
+                      {prompt}
+                    </p>
                     <LucideSparkles className="text-gray-400" />
                   </div>
                 ))}
@@ -129,7 +132,7 @@ const CoinVistaAI = () => {
                   chat.role === "user" ? (
                     <div
                       key={chat.id}
-                      className="ml-auto w-fit h-fit text-wrap max-w-[80%] px-[10px] py-[4px] rounded-[8px] break-words"
+                      className="ml-auto w-fit h-fit text-wrap max-w-full sm:max-w-[80%] px-[10px] py-[4px] rounded-[8px] break-words"
                     >
                       {chat.text}
                     </div>

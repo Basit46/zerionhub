@@ -98,7 +98,7 @@ const Post = ({ post }: { post: PostType }) => {
 
   return (
     <div className="p-[20px] flex gap-2 border-b border-b-gray-700">
-      <div className="relative size-[40px] bg-aqua-700 rounded-full">
+      <div className="relative size-[24px] vsm:size-[40px] bg-aqua-700 rounded-full">
         <Image
           src={post?.user?.avatar || "/nft2.png"}
           fill
@@ -110,10 +110,12 @@ const Post = ({ post }: { post: PostType }) => {
       <div className="flex-1">
         <div className="w-full flex items-center justify-between">
           <div className="flex items-center">
-            <p className="text-[18px]">
+            <p className="vsm:text-[18px]">
               {truncateAddress(post?.user?.walletAddress)}{" "}
-              {post?.user?.walletAddress?.toLowerCase().trim() ===
-                account?.address?.toLowerCase().trim() && "(You)"}
+              <span className="text-[10px] sm:text-base">
+                {post?.user?.walletAddress?.toLowerCase().trim() ===
+                  account?.address?.toLowerCase().trim() && "(You)"}
+              </span>
             </p>
             <LucideBadgeCheck fill="" className="ml-1 mr-3" />
             <p className="text-gray-300 text-sm">
@@ -122,10 +124,10 @@ const Post = ({ post }: { post: PostType }) => {
           </div>
 
           <Badge
-            className="px-[10px] h-[28px] rounded-full border-gray-500"
+            className="hidden vsm:block px-[10px] h-[28px] rounded-full border-gray-500"
             variant={"outline"}
           >
-            <p>
+            <p className="">
               <span
                 className={
                   parseFloat(post.returnPercent) < 0
@@ -141,7 +143,7 @@ const Post = ({ post }: { post: PostType }) => {
         </div>
 
         <div className="mt-[10px]">
-          <p>{post?.message}</p>
+          <p className="text-sm vsm:text-base">{post?.message}</p>
         </div>
 
         <div className="mt-[16px] flex items-center justify-between">
@@ -199,7 +201,7 @@ const Post = ({ post }: { post: PostType }) => {
                   key={i}
                   className="flex gap-2 bg-gray-600 p-[10px] rounded-lg"
                 >
-                  <div className="relative size-[32px] bg-aqua-700 rounded-full">
+                  <div className="relative size-[24px] vsm:size-[32px] bg-aqua-700 rounded-full">
                     <Image
                       src={comment?.user?.avatar || "/nft2.png"}
                       fill
@@ -211,7 +213,7 @@ const Post = ({ post }: { post: PostType }) => {
                   <div className="flex-1">
                     <div className="w-full flex items-center justify-between">
                       <div className="flex items-center">
-                        <p className="">
+                        <p className="text-sm vsm:text-base">
                           {truncateAddress(comment?.user?.walletAddress)}
                         </p>
                         <LucideBadgeCheck fill="" className="ml-1 mr-3" />
